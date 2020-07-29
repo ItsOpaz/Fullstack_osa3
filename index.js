@@ -40,20 +40,29 @@ let persons = [
   })
 
   app.get('/api/persons', (req, res) => {
-    res.json(persons)
+    Person.find({}).then (persons => {
+      res.json(persons)
+    })
   })
 
   app.get('/api/info', (req, res) => {
-    res.send(`Phonebook has info for ${persons.length} people <br/>
-    ${Date()}`)
+    Person.countDocuments({}).exec((err,count) => {
+      res.send(`Phonebook has info of ${count} persons <br/> ${Date()}`)
   })
+})
 
 
   app.get('/api/persons/:id', (request, response) => {
-    Person.findById(request.params.id).then(note => {
-      response.json(person)
+    Person.findById(req.params.id)
+    .then(person => {
+        if (person) {
+            res.json(person)
+        }else{
+            res.status(404).end()
+        }
     })
-  })
+    .catch(error => next(error))
+})
 
   app.delete('/api/persons/:id', (request, response) => {
     const id = Number(request.params.id)
