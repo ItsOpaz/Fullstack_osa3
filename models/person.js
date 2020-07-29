@@ -2,7 +2,7 @@ const mongoose = require('mongoose')
 
 mongoose.set('useFindAndModify', false)
 
-const url = process.env.MONGO_URL
+const url = toString(process.env.MONGO_URL)
 
 console.log('connecting to', url)
 mongoose.connect(url, { useNewUrlParser: true, useUnifiedTopology: true })
