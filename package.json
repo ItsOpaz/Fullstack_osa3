@@ -10,10 +10,13 @@
     "build:ui": "rm -rf build && cd c:/users/ollip/fullstack/osa2/puhelinluettelo && npm run build --prod && cp -r build c:/users/ollip/osa3/",
     "deploy": "git push heroku master",
     "deploy:full": "npm run build:ui && git add . && git commit -m uibuild && git push osa3 master && npm run deploy",
-    "logs:prod": "heroku logs --tail"
+    "logs:prod": "heroku logs --tail",
+    "lint": "eslint ."
   },
   "author": "Olli Pettersson",
   "devDependencies": {
+    "eslint": "^7.5.0",
+    "eslint-plugin-react": "^7.20.5",
     "nodemon": "^2.0.4"
   },
   "dependencies": {
